@@ -1,0 +1,19 @@
+la_haus:
+  url: https://www.lahaus.com
+  url_search: https://www.lahaus.com/apartamentos/medellin?millones=200%3A500&habitaciones=3%3A&banos=2%3A&pagina=
+  queries:
+    valid_house: 'ul.tabs-menu'
+    homepage_house_links: '.lh-search-card__information h2.main_listing_info a'
+    house_prize: 'h2.price-tag'
+    house_area: 'h2.price-tag span'
+    house_zone: 'h2.color-silver'
+    house_rooms: li.font-size-lt-md-sm:nth-child(1) span:nth-child(1) 
+    house_bath_rooms: 'li.font-size-lt-md-sm:nth-child(1) span:nth-child(2)'
+  regex: 
+    prize_regex: '(?<=\$)(.*?)(?=\ )'
+    area_regex: '(?<=\ ·\ )(.*?)(?=m)'
+    rooms_regex: '\d+'
+finca_raiz:
+  url: https://www.fincaraiz.com.co/
+  url_search: 
+  
