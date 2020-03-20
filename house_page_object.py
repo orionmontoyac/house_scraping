@@ -63,7 +63,7 @@ class HomePage:
         self._html = []
         page = 1
         while(page <= 44):
-            new_url = url + str(page)
+            new_url = url.replace('{}',str(page))
             response = requests.get(new_url)
             if response.status_code != 404:
                 logging.info('Getting response from: {}'.format(new_url))
