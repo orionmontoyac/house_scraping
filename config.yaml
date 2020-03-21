@@ -1,19 +1,32 @@
 la_haus:
+  page_limit: 44
   url: https://www.lahaus.com
-  url_search: https://www.lahaus.com/apartamentos/medellin?millones=200%3A500&habitaciones=3%3A&banos=2%3A&pagina={}
+  url_search: https://www.lahaus.com/apartamentos/envigado?millones=200%3A500&habitaciones=3%3A&banos=2%3A&pagina={}
   queries:
     valid_house: 'ul.tabs-menu'
     homepage_house_links: '.lh-search-card__information h2.main_listing_info a'
-    house_prize: 'h2.price-tag'
+    house_price: 'h2.price-tag'
     house_area: 'h2.price-tag span'
     house_zone: 'h2.color-silver'
-    house_rooms: li.font-size-lt-md-sm:nth-child(1) span:nth-child(1) 
-    house_bath_rooms: 'li.font-size-lt-md-sm:nth-child(1) span:nth-child(2)'
+    house_rooms: 'li.font-size-lt-md-sm:nth-child(1) > span:nth-child(2)' 
+    house_bath_rooms: 'li.font-size-lt-md-sm:nth-child(2) > span:nth-child(2)'
   regex: 
-    prize_regex: '(?<=\$)(.*?)(?=\ )'
+    price_regex: '(?<=\$)(.*?)(?=\ )'
     area_regex: '(?<=\ ·\ )(.*?)(?=m)'
     rooms_regex: '\d+'
 finca_raiz:
-  url: https://www.fincaraiz.com.co/
-  url_search: https://www.fincaraiz.com.co/apartamento-casa/venta/medellin/?ad=30|{}||||1||8,9|||55|5500006||200000000|400000000|||||3|2|||||||1|||1||griddate%20desc||||-1||
-  
+  page_limit: 123
+  url: https://www.fincaraiz.com.co
+  url_search: https://www.fincaraiz.com.co/apartamento-casa/venta/antioquia/?ad=30|{}||||1||8,9|||55|||200000000|400000000|||||3|2|||||||1|||1||griddate%20desc||||-1||
+  queries:
+    valid_house: '#ctl00_phMasterPage_cAdvert_ucMultimedias_icoNewBuilding'
+    homepage_house_links: 'div.span-title a'
+    house_price: 'div.price h2'
+    house_area: '.advertSurface'
+    house_zone: '.box > h1:nth-child(1) > span:nth-child(2)'
+    house_rooms: '.advertRooms' 
+    house_bath_rooms: '.advertBaths'
+  regex: 
+    price_regex: '(?<=\ )(.*?)(?=\.)'
+    area_regex: '(.*?)(?=,)'
+    rooms_regex: '\d+'

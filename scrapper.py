@@ -10,6 +10,7 @@ def _save_houses(news_site_uid, houses):
 
         writer.writeheader()
         for house in houses:
+            logging.info('Save house: {}'.format(house._link))
             row = {prop:str(getattr(house, prop)) for prop in csv_headers}#[str(getattr(house, prop)) for prop in csv_headers]
             writer.writerow(row)
             
@@ -30,7 +31,7 @@ def _fetch_house(news_site_uid, host, link):
         logging.warn('Error while fetching house!', exc_info=False)
 
     if house and not house._valid_house():
-        logging.warn('Invalid house. There is no body.')
+        logging.warn('Invalid house.')
         return None
     
     return house
@@ -63,4 +64,4 @@ def _find_house_links_in_homepage(news_site_uid):
     return homepage.house_links
 
 if __name__ == "__main__":
-    _houses_scraper('la_haus')
+    _houses_scraper('finca_raiz')

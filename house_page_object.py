@@ -49,6 +49,7 @@ class HomePage:
     def __init__(self, news_site_uid, url):
         self._queries = config()[news_site_uid]['queries']
         self._regex = config()[news_site_uid]['regex']
+        self._page_limit = config()[news_site_uid]['page_limit']
         self._html = None
         self._visit(url)
         
@@ -62,7 +63,7 @@ class HomePage:
     def _visit(self, url):
         self._html = []
         page = 1
-        while(page <= 44):
+        while(page <= self._page_limit):
             new_url = url.replace('{}',str(page))
             response = requests.get(new_url)
             if response.status_code != 404:
@@ -99,10 +100,10 @@ class housePage(HousePage):
         return zone if len(result) else ''
     
     @property
-    def prize(self):
-        result = self._select(self._queries['house_prize'])
-        prize = re.search(self._regex['prize_regex'],result[0].text)[0]
-        return prize if len(result) else ''
+    def price(self):
+        result = self._select(self._queries['house_price'])
+        price = re.search(self._regex['price_regex'],result[0].text)[0]
+        return price if len(result) else ''
 
     @property
     def area(self):
@@ -112,7 +113,7 @@ class housePage(HousePage):
 
     @property
     def rooms(self):
-        result = self._select(self._queries['house_bath_rooms'])
+        result = self._select(self._queries['house_rooms'])
         rooms = re.search(self._regex['rooms_regex'],result[0].text)[0]
         return rooms if len(result) else ''
     
